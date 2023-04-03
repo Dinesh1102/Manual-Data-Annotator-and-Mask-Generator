@@ -9,6 +9,8 @@ def main():
 @app.route('/submit',methods=['GET','POST'])
 def get_output():
     if request.method=='POST':
+        if (not os.path.exists('images')):
+            os.mkdir('images')
         img = request.files['my_image']
         img_path = "images/" + img.filename	
         img.save(img_path)
