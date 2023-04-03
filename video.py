@@ -11,6 +11,8 @@ def main():
 def get_output():
     if request.method=='POST':
         video = request.files['uploaded']
+        if(not os.path.exists('images')):
+            os.mkdir('images')
         vid_path = "images/" + video.filename	
         video.save(vid_path)
         vidcap = cv2.VideoCapture(vid_path)
