@@ -1,0 +1,8 @@
+python==3.10.9
+numpy
+os
+cv2
+ultralytics==8.0.0
+shutil
+moviepy
+mediapipe
