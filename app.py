@@ -12,7 +12,7 @@ def get_output():
         img = request.files['my_image']
         img_path = "images/" + img.filename	
         img.save(img_path)
-        model=YOLO('yolov8s-seg.pt')
+        model=YOLO('yolov8n-seg.pt')
         result=model.predict(img_path,project='static',exist_ok=True,save=True)
         return render_template('index.html',flag=1,filename=img.filename)
 
