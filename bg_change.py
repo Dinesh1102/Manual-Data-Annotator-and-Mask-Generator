@@ -30,5 +30,3 @@ def bg_change_op():
         print(result_path)
         cv2.imwrite(result_path,changed)
         return render_template('bg_change.html',flag=1,filename=img.filename)
-
-
