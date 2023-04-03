@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template,redirect,url_for
-import base64,cv2
+import base64,os
 from ultralytics import YOLO
 
 
@@ -12,6 +12,8 @@ def main():
 @app.route("/crop-image", methods=['GET','POST'])
 def crop_image():
     if request.method=='POST':
+        if (not os.path.exists('static/cr')):
+            os.makedirs('static/cr')
         img = request.files['image']
         cropped_img = request.form['croppedImage']
         filename = "static/cr/cropped"+img.filename
