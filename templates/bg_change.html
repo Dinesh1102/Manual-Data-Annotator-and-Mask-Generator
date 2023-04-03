@@ -21,7 +21,7 @@
 <div class="container">
   <h1 class="jumbotron bg-primary">Background Change</h1>
   <br><br>
-  <form class="form-horizontal" action="/submit" method="post" enctype="multipart/form-data">
+  <form class="form-horizontal" action="/submit_bg_change" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
       <label class="control-label col-sm-2" for="pwd">Upload Your Image :</label>
@@ -40,7 +40,7 @@
 
 
 {%if filename %}
-<img src="{{url_for('display_image',filename=filename)}}" alt="">
+<img src="{{url_for('display_bg_change',filename=filename)}}" alt="">
 {%endif%}
 <script>
   const canvas = document.getElementById("canvas");
