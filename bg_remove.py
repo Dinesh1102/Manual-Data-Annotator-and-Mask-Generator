@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,redirect,url_for
-import cv2
+import cv2,os
 import numpy as np
 import mediapipe as mp
 app = Flask(__name__)
@@ -11,6 +11,8 @@ def main():
 def get_output():
     if request.method=='POST':
         img = request.files['my_image']
+        if(not os.path.exists('images')):
+           os.mkdir('images')
         img_path = "images/" + img.filename	
         img.save(img_path)
         change_background_mp = mp.solutions.selfie_segmentation
@@ -20,7 +22,9 @@ def get_output():
         result = change_bg_segment.process(RGB_sample_img)
         binary_mask = result.segmentation_mask > 0.9
         binary_mask_3 = np.dstack((binary_mask,binary_mask,binary_mask))
-        output_image = np.where(binary_mask_3, sample_img, 255)   
+        output_image = np.where(binary_mask_3, sample_img, 255) 
+        if(not os.path.exists('static/bg_removed')):
+            os.makedirs('static/bg_removed')
         result_path =  "static/bg_removed/"+img.filename
         print(result_path)
         cv2.imwrite(result_path,output_image)
