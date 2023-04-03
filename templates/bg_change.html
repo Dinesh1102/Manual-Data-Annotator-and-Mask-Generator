@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+  <title>Ufff!!!!</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    #canvas {
+      border: 1px solid black;
+    }
+    #canvas_bg{
+     border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="jumbotron bg-primary">Background Change</h1>
+  <br><br>
+  <form class="form-horizontal" action="/submit" method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Upload Your Image :</label>
+      <div class="col-sm-10">          
+        <input type="file" class="form-control" name="my_image" id="fileInput">
+        <input type="file" class="form-control" name="bg" id="bgInput">
+        <canvas id="canvas"></canvas>
+        <canvas id="canvas_bg"></canvas>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+
+{%if filename %}
+<img src="{{url_for('display_image',filename=filename)}}" alt="">
+{%endif%}
+<script>
+  const canvas = document.getElementById("canvas");
+  let image = new Image();
+  const ctx = canvas.getContext("2d");
+  document.getElementById("fileInput").addEventListener("change", (e) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      image.src = event.target.result;
+      image.onload = () => {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0);
+      };
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
+  const canvas_bg = document.getElementById("canvas_bg");
+  let bg = new Image();
+  const cty = canvas_bg.getContext("2d");
+  document.getElementById("bgInput").addEventListener("change", (e) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      bg.src = event.target.result;
+      bg.onload = () => {
+        canvas_bg.width = bg.width;
+        canvas_bg.height = bg.height;
+        cty.drawImage(bg, 0, 0);
+      };
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
+</script>
+
+</body>
+</html>
