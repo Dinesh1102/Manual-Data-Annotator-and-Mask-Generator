@@ -10,6 +10,10 @@ def main():
 @app.route('/submit',methods=['GET','POST'])
 def get_output():
     if request.method=='POST':
+        if os.path.exists('op'):
+            shutil.rmtree('op')
+        if os.path.exists('frames'):
+            shutil.rmtree('frames')
         if (not os.path.exists('images')):
             os.mkdir('images')
         video = request.files['uploaded']
