@@ -13,7 +13,7 @@ def main():
     return render_template('home.html')
 
 @app.route('/all')
-def index():
+def all():
     return render_template('all.html')
 
 @app.route('/crop' )
