@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Video</title>
+</head>
+<body>
+    <form action="/submit" method="post" enctype="multipart/form-data">
+        <input type="file" accept="video/*" name="uploaded" id="video_ip" onchange="loadVideo(event)">
+        <br>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    
+
+    {%if flag==1%}
+        <video id="result" controls autoplay style="max-width: 100%;">
+            <source src="{{url_for('display_video',filename=filename)}}" type="video/mp4">
+        </video>
+    {% else %}
+        <video id="uploaded_video" controls autoplay style="max-width: 100%;"></video>
+    {% endif %}
+    <script>
+      const videoInput = document.getElementById('video_ip');
+      const uploadedVideo = document.getElementById('uploaded_video');
+      videoInput.addEventListener('change', () => {
+        const file = videoInput.files[0];
+        const url = URL.createObjectURL(file);
+        uploadedVideo.src = url;
+      });
+    </script>
+</body>
+</html>
