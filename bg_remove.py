@@ -2,17 +2,12 @@ from flask import Flask,render_template,request,redirect,url_for
 import cv2,os
 import numpy as np
 import mediapipe as mp
-app = Flask(__name__)
-@app.route('/',methods=['GET','POST'])
-def main():
-    return render_template('bg_remove.html')
 
-@app.route('/submit',methods=['GET','POST'])
-def get_output():
+def bg_remove_op():
     if request.method=='POST':
+        if (not os.path.exists('images')):
+            os.mkdir('images')
         img = request.files['my_image']
-        if(not os.path.exists('images')):
-           os.mkdir('images')
         img_path = "images/" + img.filename	
         img.save(img_path)
         change_background_mp = mp.solutions.selfie_segmentation
@@ -24,17 +19,8 @@ def get_output():
         binary_mask_3 = np.dstack((binary_mask,binary_mask,binary_mask))
         output_image = np.where(binary_mask_3, sample_img, 255) 
         if(not os.path.exists('static/bg_removed')):
-            os.makedirs('static/bg_removed')
+            os.makedirs('static/bg_removed')  
         result_path =  "static/bg_removed/"+img.filename
         print(result_path)
         cv2.imwrite(result_path,output_image)
         return render_template('bg_remove.html',flag=1,filename=img.filename)
-
-
-@app.route('/display/<filename>')
-def display_image(filename):
-    return redirect(url_for('static',filename='bg_removed/'+filename),code=301)
-
-
-if __name__=='__main__':
-    app.run(debug = True)
