@@ -2,13 +2,8 @@ from flask import Flask,render_template,request,redirect,url_for
 import os,cv2
 import shutil
 from ultralytics import YOLO
-app = Flask(__name__)
-@app.route('/',methods=['GET','POST'])
-def main():
-    return render_template('video.html')
 
-@app.route('/submit',methods=['GET','POST'])
-def get_output():
+def video_op():
     if request.method=='POST':
         if os.path.exists('op'):
             shutil.rmtree('op')
@@ -67,10 +62,3 @@ def get_output():
         if os.path.exists('frames'):
             shutil.rmtree('frames')
         return render_template('video.html',flag=1,filename=video.filename)
-    
-@app.route('/display/<filename>')
-def display_video(filename):
-    return redirect(url_for('static',filename='vid_pred/'+filename),code=301)
-
-if __name__=='__main__':
-    app.run(debug = True)
