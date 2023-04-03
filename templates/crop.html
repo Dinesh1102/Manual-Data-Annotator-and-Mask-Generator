@@ -9,15 +9,15 @@
   </head>
   <body>
     {%if flag==1%}
-      <form action="/done" method="POST" enctype="multipart/form-data">
-        <img src="{{url_for('display_image',filename=filename)}}" alt="">
+      <form action="/crop_res" method="POST" enctype="multipart/form-data">
+        <img src="{{url_for('display_image_crop',filename=filename)}}" alt="">
         <input type="hidden" id="cropped" name="input" value="{{filename}}" />
         <button type="submit" id="submit">Submit</button>
       </form>
     {% elif flag==2 %}
-      <img src="{{url_for('display_image',filename=filename)}}" alt="">
+      <img src="{{url_for('display_image_crop_res',filename=filename)}}" alt="">
     {% else %}
-      <form action="/crop-image" method="POST" enctype="multipart/form-data">
+      <form action="/cropimage" method="POST" enctype="multipart/form-data">
         <input type="hidden" id="cropped" name="croppedImage" />
         <input type="file" id="fileInput" name="image"/>
         <br />
