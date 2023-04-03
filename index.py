@@ -1,11 +1,11 @@
 from flask import Flask,render_template,request,redirect,url_for
 import os
 from ultralytics import YOLO
-from all import all_op
-from crop import crop_image,crop_op
-from video import video_op
-from bg_remove import bg_remove_op
-from bg_change import bg_change_op
+from routes.all import all_op
+from routes.crop import crop_image,crop_op
+from routes.video import video_op
+from routes.bg_remove import bg_remove_op
+from routes.bg_change import bg_change_op
 app = Flask(__name__)
 
 @app.route('/')
