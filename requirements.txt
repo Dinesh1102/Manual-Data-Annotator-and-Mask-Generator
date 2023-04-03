@@ -1,7 +1,4 @@
 numpy
-os
-cv2
 ultralytics==8.0.0
-shutil
 moviepy
 mediapipe
