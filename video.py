@@ -10,9 +10,9 @@ def main():
 @app.route('/submit',methods=['GET','POST'])
 def get_output():
     if request.method=='POST':
-        video = request.files['uploaded']
-        if(not os.path.exists('images')):
+        if (not os.path.exists('images')):
             os.mkdir('images')
+        video = request.files['uploaded']
         vid_path = "images/" + video.filename	
         video.save(vid_path)
         vidcap = cv2.VideoCapture(vid_path)
@@ -43,11 +43,12 @@ def get_output():
                 results = model('frames/'+f,project='op',save=True,exist_ok=True)
 
         from moviepy.editor import ImageSequenceClip
-
+        if(not os.path.exists('static/vid_pred')):
+            os.makedirs('static/vid_pred')
         # Set the path for the input images and output video
         input_path = "op/predict"
         output_path = "static/vid_pred/"+video.filename
-
+        
         
         # Get the list of image file names in the input path
         image_files = sorted([f for f in os.listdir(input_path) if f.endswith('.jpg')])
