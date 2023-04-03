@@ -2,13 +2,8 @@ from flask import Flask,render_template,request,redirect,url_for
 import cv2,os
 import numpy as np
 import mediapipe as mp
-app = Flask(__name__)
-@app.route('/',methods=['GET','POST'])
-def main():
-    return render_template('bg_change.html')
 
-@app.route('/submit',methods=['GET','POST'])
-def get_output():
+def bg_change_op():
     if request.method=='POST':
         if (not os.path.exists('images')):
             os.mkdir('images')
@@ -37,10 +32,3 @@ def get_output():
         return render_template('bg_change.html',flag=1,filename=img.filename)
 
 
-@app.route('/display/<filename>')
-def display_image(filename):
-    return redirect(url_for('static',filename='bg_changed/'+filename),code=301)
-
-
-if __name__=='__main__':
-    app.run(debug = True)
