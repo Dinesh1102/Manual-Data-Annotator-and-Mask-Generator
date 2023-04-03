@@ -3,7 +3,7 @@ import base64,cv2
 from ultralytics import YOLO
 
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 @app.route('/',methods=['GET','POST'])
 def main():
@@ -36,5 +36,5 @@ def display_image(filename):
     return redirect(url_for('static',filename='cr/'+filename),code=301)
 
 
-if _name=='main_':
+if __name__=='__main__':
     app.run(debug = True)
