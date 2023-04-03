@@ -2,3 +2,4 @@ numpy
 ultralytics==8.0.0
 moviepy
 mediapipe
+flask
