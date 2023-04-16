@@ -6,11 +6,22 @@ from routes.crop import crop_image,crop_op
 from routes.video import video_op
 from routes.bg_remove import bg_remove_op
 from routes.bg_change import bg_change_op
+from routes.manual import manual
+from routes.all_wmask import all_wop
 app = Flask(__name__)
 
 @app.route('/')
 def main():
     return render_template('home.html')
+
+@app.route('/all_wmask' )
+def all_wmask():
+    return render_template('all_wmask.html')
+
+
+@app.route('/Mmask')
+def Mmask():
+    return render_template('Mmask.html')
 
 @app.route('/all')
 def all():
@@ -31,6 +42,26 @@ def bg_remove():
 @app.route('/bg_change')
 def bg_change():
     return render_template('bg_change.html')
+
+#manual mask
+@app.route('/mask_upload',methods=['POST'])
+def mask_upload():
+    return manual()
+
+@app.route('/display_manual/<filename>')
+def display_manual(filename):
+    return redirect(url_for('static',filename='manual/'+filename),code=301)
+
+
+#All White masks
+@app.route('/submit_all_wmask',methods=['POST'])
+def submit_all_wmask():
+    return all_wop()
+
+@app.route('/display_image_all_wmask/<filename>')
+def display_image_all_wmask(filename):
+    return redirect(url_for('static',filename='all_wmask/'+filename),code=301)
+
 
 
 #All masks
