@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Draw on Image</title>
+</head>
+<body>
+    <form id="coordinatesForm" action="/mask_upload" method="POST" enctype="multipart/form-data">
+        <div>
+        <input type="file" id="imageLoader" name="imageLoader"/>
+        <canvas id="imageCanvas"></canvas>
+        </div>
+        <br>
+        <button id="submitBtn" onclick="submitForm(event)">Submit</button>
+        <input type="hidden" id="coordinatesInput" name="coordinates">
+    </form>
+    {%if flag==1 %}
+        <a href="{{url_for('display_manual',filename=filename)}}" download="">
+            <img src="{{url_for('display_manual',filename=filename)}}" alt="">
+            <button>Download</button>
+        </a>
+        
+    {%endif%}
+    
+    <script>
+        var canvas = document.getElementById('imageCanvas');
+            var ctx = canvas.getContext('2d');
+    
+            // Initialize variables
+            var drawing = false;
+            var coordinates = [];
+            var currentPolyline = [];
+            var polylineCounter = 0;
+            // Add event listener to the file input
+            var imageLoader = document.getElementById('imageLoader');
+            imageLoader.addEventListener('change', loadImage);
+    
+            // Add event listeners to the canvas
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', endDrawing);
+    
+            // Add event listener to the submit button
+            var submitBtn = document.getElementById('submitBtn');
+            submitBtn.addEventListener('click', sendData);
+    
+            // Load the image into the canvas
+            function loadImage(event) {
+            var image = new Image();
+            image.onload = function() {
+                canvas.width = image.width;
+                canvas.height = image.height;
+                ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            };
+            image.src = URL.createObjectURL(event.target.files[0]);
+            }
+            
+            // Start drawing the polyline
+            function startDrawing(event) {
+            drawing = true;
+            var x = event.offsetX;
+            var y = event.offsetY;
+            currentPolyline.push({x: x, y: y});
+            }
+    
+            // Draw the polyline
+            function draw(event) {
+            if (!drawing) return;
+            if (currentPolyline.length > 0) {
+                // Get the current mouse position on the canvas and push it into the currentPolyline array
+                const mouseX = event.offsetX;
+                const mouseY = event.offsetY;
+                currentPolyline.push({ x: mouseX, y: mouseY });
+            
+            
+                // Draw the current polyline on the canvas
+                ctx.beginPath();
+                ctx.moveTo(currentPolyline[0].x, currentPolyline[0].y);
+                for (let i = 1; i < currentPolyline.length; i++) {
+                  ctx.lineTo(currentPolyline[i].x, currentPolyline[i].y);
+                }
+                ctx.stroke();
+              }
+            }
+    
+            // End drawing the polyline
+            function endDrawing(event) {
+            drawing = false;
+            const firstPoint = currentPolyline[0];
+            const lastPoint = currentPolyline[currentPolyline.length - 1];
+            const distanceThreshold = 10; // Adjust as needed
+            const distance = Math.sqrt(Math.pow(firstPoint.x - lastPoint.x, 2) + Math.pow(firstPoint.y - lastPoint.y, 2));
+            if (distance < distanceThreshold) {
+                polylineCounter++;
+                if (!coordinates[polylineCounter]) coordinates[polylineCounter] = [];
+                for (let i = 0; i < currentPolyline.length; i++) {
+                    coordinates[polylineCounter].push(currentPolyline[i]);
+                }
+                currentPolyline = [];
+            }
+            }
+    
+            // Send the data to the Flask backend
+            function submitForm(event) {
+                event.preventDefault();
+                document.getElementById('coordinatesInput').value = JSON.stringify(coordinates);
+                document.getElementById('coordinatesForm').submit();
+            }
+    </script>
+
+</body>
+
+</html>
