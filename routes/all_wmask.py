@@ -31,4 +31,8 @@ def all_wop():
             os.makedirs('static/all_wmask')
         # save results
         cv2.imwrite('static/all_wmask/'+im.filename, mask)
+        if not os.path.exists('static/all_wmask/res'):
+            os.makedirs('static/all_wmask/res')
+        result = cv2.bitwise_and(img, img, mask=mask)
+        cv2.imwrite('static/all_wmask/res/'+im.filename,result)
         return render_template('all_wmask.html',flag=1,filename=im.filename)
