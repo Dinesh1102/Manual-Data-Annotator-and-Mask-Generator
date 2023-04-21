@@ -51,6 +51,9 @@ def mask_upload():
 @app.route('/display_manual/<filename>')
 def display_manual(filename):
     return redirect(url_for('static',filename='manual/'+filename),code=301)
+@app.route('/display_manual_res/<filename>')
+def display_manual_res(filename):
+    return redirect(url_for('static',filename='manual/res/'+filename),code=301)
 
 
 #All White masks
@@ -61,6 +64,9 @@ def submit_all_wmask():
 @app.route('/display_image_all_wmask/<filename>')
 def display_image_all_wmask(filename):
     return redirect(url_for('static',filename='all_wmask/'+filename),code=301)
+@app.route('/display_image_all_wmask_res/<filename>')
+def display_image_all_wmask_res(filename):
+    return redirect(url_for('static',filename='all_wmask/res/'+filename),code=301)
 
 
 
