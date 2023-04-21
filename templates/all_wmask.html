@@ -37,8 +37,13 @@
 {%if filename %}
 <a href="{{url_for('display_image_all_wmask',filename=filename)}}" download="">
  <img src="{{url_for('display_image_all_wmask',filename=filename)}}" alt="">
+ 
  <button>Download</button>
 </a>
+<a href="{{url_for('display_image_all_wmask_res',filename=filename)}}" download="">
+  <img src="{{url_for('display_image_all_wmask_res',filename=filename)}}" alt="">
+  <button>Download</button>
+ </a>
 {%endif%}
 <script>
   const canvas = document.getElementById("canvas");
