@@ -19,7 +19,10 @@
             <img src="{{url_for('display_manual',filename=filename)}}" alt="">
             <button>Download</button>
         </a>
-        
+        <a href="{{url_for('display_manual_res',filename=filename)}}" download="">
+          <img src="{{url_for('display_manual_res',filename=filename)}}" alt="">
+          <button>Download</button>
+      </a>
     {%endif%}
     <button onclick="temp1()">DRAW</button>
     <button onclick="temp2()">POINTS </button>
@@ -37,7 +40,9 @@
             var imageLoader = document.getElementById('imageLoader');
             imageLoader.addEventListener('change', loadImage);
     
-          
+            // Add event listeners to the canvas
+            
+            canvas.addEventListener('click',addPoint);
             // Add event listener to the submit button
             var submitBtn = document.getElementById('submitBtn');
             submitBtn.addEventListener('click', sendData);
@@ -81,6 +86,7 @@
             
                 // Draw the current polyline on the canvas
                 ctx.beginPath();
+                ctx.strokeStyle='white'
                 ctx.moveTo(currentPolyline[0].x, currentPolyline[0].y);
                 for (let i = 1; i < currentPolyline.length; i++) {
                   ctx.lineTo(currentPolyline[i].x, currentPolyline[i].y);
@@ -124,8 +130,8 @@
                     let lastPoint = currentPolyline[currentPolyline.length - 1];
                     ctx.beginPath();
                     ctx.arc(lastPoint.x, lastPoint.y, 5, 0, 2*Math.PI);
-                    ctx.strokeStyle = 'black';
-                    ctx.fillStyle = 'black';
+                    ctx.strokeStyle = 'white';
+                    ctx.fillStyle = 'white';
                     ctx.lineWidth = 2;
                     ctx.fill();
                     ctx.stroke();
@@ -155,8 +161,8 @@
                         let lastPoint = currentPolyline[currentPolyline.length - 1];
                         ctx.beginPath();
                         ctx.arc(lastPoint.x, lastPoint.y, 5, 0, 2*Math.PI);
-                        ctx.strokeStyle = 'black';
-                        ctx.fillStyle = 'black';
+                        ctx.strokeStyle = 'white';
+                        ctx.fillStyle = 'white';
                         ctx.lineWidth = 2;
                         ctx.fill();
                         ctx.stroke();
