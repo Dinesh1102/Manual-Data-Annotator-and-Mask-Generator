@@ -9,6 +9,7 @@ def manual():
             os.makedirs('images')
         im_path='images/'+im.filename
         im.save(im_path)
+        img = cv2.imread(im_path)
         data = request.form.get('coordinates')
         data=json.loads(data)
         result=[]
@@ -21,7 +22,6 @@ def manual():
         cnt=0
         for i in result:
             cnt+=1
-            img = cv2.imread(im_path)
             H , W , _ = img.shape
             mask = np.zeros((H, W), dtype=np.uint8)
             points = np.array([i])
@@ -41,7 +41,11 @@ def manual():
                 bg=cv2.imread("static/manual/"+im.filename )
                 res=cv2.bitwise_or(cur,bg,mask=None)
                 cv2.imwrite("static/manual/"+im.filename , res)
-        
+        if not os.path.exists('static/manual/res'):
+            os.makedirs('static/manual/res')
+        tem =cv2.imread("static/manual/"+im.filename)
+        resu=cv2.bitwise_and(img,tem,mask=None)
+        cv2.imwrite("static/manual/res/"+im.filename,resu)
         if os.path.exists('static/results'):
             shutil.rmtree('static/results')
         return render_template('Mmask.html',filename=im.filename,flag=1)
