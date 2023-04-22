@@ -29,7 +29,7 @@
 
 End user draws a bounding box and all the objects inside the box are segmented and labelled.
 
-<img src="assets/delective.jpeg" width="500">
+<img src="assets/selective.jpg" width="500">
 
 ## 4. Background Removal
 
