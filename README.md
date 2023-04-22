@@ -47,6 +47,11 @@ Background is changed for all the objects whose accuracy score is >90%
 
 Instance segmentation is done for all the objects in the video dynamically
 
+
+https://user-images.githubusercontent.com/94825630/233792827-1c2ae8fd-b1f8-4f14-94ba-dea47bb63b70.mp4
+
+
+
 # Installation
 Clone the repository:
 
