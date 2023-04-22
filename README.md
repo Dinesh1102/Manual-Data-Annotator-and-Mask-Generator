@@ -7,7 +7,7 @@
  
  End user drags the mouse pointer around the desired object to form a loop so that a white mask is generated around it.
  
- ![](assets/nuclei.jpeg)
+ <img src="assets/nuclei.jpeg" width="500">
  
  End user can use polylines (by marking points) to form a loop and generate a mask.
  
@@ -17,31 +17,31 @@
  
   A white mask is generated around all the objects detected by the model.
   
-![](assets/pills.jpeg)
+<img src="assets/pills.jpeg" width="500">
 
 ## 2. Instance Segmentation For All Objects
  
   Model generates a mask along with label and accuracy score for all the detected objects in the image.
   
-![](assets/instanceforall.jpg)
+<img src="assets/instanceforall.jpeg" width="500">
 
 ## 3. Selective Segmentation
 
 End user draws a bounding box and all the objects inside the box are segmented and labelled.
 
-![](assets/selective.jpeg)
+<img src="assets/delective.jpeg" width="500">
 
 ## 4. Background Removal
 
 Background is removed for all the objects whose accuracy score is > 90%
 
-![](assets/bgremove.jpeg)
+<img src="assets/bgremove.jpeg" width="500">
 
 ## 5. Background Change
 
 Background is changed for all the objects whose accuracy score is >90%
 
-![](assets/bgchange.jpeg)
+<img src="assets/bgchange.jpeg" width="500">
 
 ## 6. Object Detection For Video
 
