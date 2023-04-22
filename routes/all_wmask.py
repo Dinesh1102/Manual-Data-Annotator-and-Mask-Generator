@@ -1,38 +1,27 @@
-
-
 from flask import Flask, request, render_template,redirect,url_for,session,flash,json
 import base64,os,cv2
 import numpy as np
-from ultralytics import YOLO
 from flask_pymongo import PyMongo
-import pymongo
-import bcrypt
-import json
-from pymongo import MongoClient
 from werkzeug.utils import secure_filename
-
 from bson.binary import Binary
-# from bson.codec_options import _get_object_size
 import base64
+
 app = Flask(__name__)
 
 
 app.config["MONGO_DBNAME"] = 'maskgenerator'
 app.config['MONGO_URI'] = "mongodb://localhost:27017/maskgenerator"
-
-# mongo = PyMongo(app)
-
 mongo_uri = "mongodb://localhost:27017/maskgenerator"
 mongo = PyMongo(app, uri=mongo_uri)
 
-
+#encode images as base64 strings 
 def b64encode(value):
     return base64.b64encode(value).decode('utf-8')
 
 # Add the b64encode filter to the Jinja2 environment
 app.jinja_env.filters['b64encode'] = b64encode
 
-
+#generate masks for all the objects
 def all_wop():
     if request.method=='POST':
         if (not os.path.exists('images')):
@@ -61,23 +50,26 @@ def all_wop():
             os.makedirs('static/all_wmask')
         # save results
         cv2.imwrite('static/all_wmask/'+im.filename, mask)
+
+        #generate objects from input image on result and save it    
         if not os.path.exists('static/all_wmask/res'):
             os.makedirs('static/all_wmask/res')
         result = cv2.bitwise_and(img, img, mask=mask)
         cv2.imwrite('static/all_wmask/res/'+im.filename,result)
 
+
+        #save history to database
         username=session['username']
         images= mongo.db.images
         existing_user=images.find_one({'user':username})
-        # file=cv2.imread("static/crop_before/"+img)
+       
         with open("images/"+ im.filename,"rb") as file:
             encoded_image = base64.b64encode(file.read())
         with open("static/all_wmask/"+im.filename,"rb") as file2:
             encoded_image2 = base64.b64encode(file2.read())
         with open("static/all_wmask/res/"+im.filename,"rb") as op:
             encoded_op = base64.b64encode(op.read())
-        # op=cv2.imread("static/cr/"+img)
-        # encoded_op = base64.b64encode(op)
+        
 
         if existing_user is None:
             images.insert_one({
