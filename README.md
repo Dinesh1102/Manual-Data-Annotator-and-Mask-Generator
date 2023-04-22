@@ -17,7 +17,7 @@
  
   A white mask is generated around all the objects detected by the model.
   
-![](assets/pills.jpeg =250x250)
+![](assets/pills.jpeg|width=250)
 
  2. Instance Segmentation For All Objects
  
