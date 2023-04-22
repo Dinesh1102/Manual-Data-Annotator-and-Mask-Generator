@@ -2,10 +2,6 @@ from flask import Flask,render_template,request,redirect,url_for,session
 import os
 from ultralytics import YOLO
 from flask_pymongo import PyMongo
-import pymongo
-import bcrypt
-import json
-from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from bson.binary import Binary
 import base64
