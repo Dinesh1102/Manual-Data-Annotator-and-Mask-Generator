@@ -5,3 +5,4 @@ mediapipe
 flask
 pymongo
 flask_pymongo
+flask_mail
