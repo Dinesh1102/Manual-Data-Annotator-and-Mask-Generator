@@ -3,6 +3,7 @@ import os,cv2
 import shutil
 from ultralytics import YOLO
 
+#run predictions on video
 def video_op():
     if request.method=='POST':
         if os.path.exists('op'):
@@ -25,7 +26,6 @@ def video_op():
         count=0
         while success:
             # Process the frame here
-            # processed_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             success, image = vidcap.read()
             current_frame = vidcap.get(cv2.CAP_PROP_POS_FRAMES)
             # Save the processed frame as an image
