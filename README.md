@@ -47,16 +47,19 @@ Background is changed for all the objects whose accuracy score is >90%
 
 Instance segmentation is done for all the objects in the video dynamically
 
-#Installation
+# Installation
 Clone the repository:
+
 ```git clone https://github.com/Dinesh1102/Manual-Data-Annotator-and-Mask-Generator.git```
 
-Change the current working directory
+Change the current working directory:
+
 ```cd Manual-Data-Annotator-and-Mask-Generator-main```
 
-Install the requirements
+Install the requirements:
 
 ```pip install -r requirements.txt```
 
-Run the server
+Run the server:
+
 ```python index.py```
