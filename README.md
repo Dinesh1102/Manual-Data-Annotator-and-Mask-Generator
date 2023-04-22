@@ -23,13 +23,13 @@
  
   Model generates a mask along with label and accuracy score for all the detected objects in the image.
   
-<img src="assets/instanceforall.jpeg" width="500">
+<img src="assets/instanceforall.jpg" width="500">
 
 ## 3. Selective Segmentation
 
 End user draws a bounding box and all the objects inside the box are segmented and labelled.
 
-<img src="assets/selective.jpg" width="500">
+<img src="assets/selective.jpeg" width="500">
 
 ## 4. Background Removal
 
