@@ -16,9 +16,26 @@
  1. Generating White Masks For All Objects
   A white mask is generated around all the objects detected by the model.
   
-![](assets/pills.jpeg)
+![](assets/pills.jpeg=250x250)
 
  2. Instance Segmentation For All Objects
   Model generates a mask along with label and accuracy score for all the detected objects in the image.
   
 ![](assets/instanceforall.jpg)
+
+3. Selective Segmentation
+End user draws a bounding box and all the objects inside the box are segmented and labelled.
+
+![](assets/selective)
+
+4. Background Removal
+Background is removed for all the objects whose accuracy score is > 90%
+
+![](assets/bgremove)
+
+5. Background Change
+Background is changed for all the objects whose accuracy score is >90%
+
+![](assets/bgchange.jpeg)
+
+6. Object Detection For Video
