@@ -17,7 +17,7 @@
  
   A white mask is generated around all the objects detected by the model.
   
-![](assets/pills.jpeg=250x250)
+![](assets/pills.jpeg =250x250)
 
  2. Instance Segmentation For All Objects
  
@@ -35,7 +35,7 @@ End user draws a bounding box and all the objects inside the box are segmented a
 
 Background is removed for all the objects whose accuracy score is > 90%
 
-![](assets/bgremove)
+![](assets/bgremove.jpeg)
 
 5. Background Change
 
