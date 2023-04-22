@@ -13,37 +13,37 @@
  
  # Extended Features
  
- 1. Generating White Masks For All Objects
+## 1. Generating White Masks For All Objects
  
   A white mask is generated around all the objects detected by the model.
   
 ![](assets/pills.jpeg)
 
- 2. Instance Segmentation For All Objects
+## 2. Instance Segmentation For All Objects
  
   Model generates a mask along with label and accuracy score for all the detected objects in the image.
   
 ![](assets/instanceforall.jpg)
 
-3. Selective Segmentation
+## 3. Selective Segmentation
 
 End user draws a bounding box and all the objects inside the box are segmented and labelled.
 
 ![](assets/selective.jpeg)
 
-4. Background Removal
+## 4. Background Removal
 
 Background is removed for all the objects whose accuracy score is > 90%
 
 ![](assets/bgremove.jpeg)
 
-5. Background Change
+## 5. Background Change
 
 Background is changed for all the objects whose accuracy score is >90%
 
 ![](assets/bgchange.jpeg)
 
-6. Object Detection For Video
+## 6. Object Detection For Video
 
 Instance segmentation is done for all the objects in the video dynamically
 
