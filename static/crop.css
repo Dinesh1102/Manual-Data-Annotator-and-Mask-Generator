@@ -1,0 +1,197 @@
+  /* cropcss */
+
+  body{
+    margin: 0px;
+    overflow-x: hidden;
+  
+  
+  }
+  
+  
+  /* The navigation menu */
+  
+  .bg1{
+    height: 100vh;
+    width:100vw;
+    background-image: url('/static/images/nav-bg-main2.jpeg') ;
+    background-repeat: no-repeat;
+    background-size: 100% 50% ;
+}
+.navbar1 {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+
+
+  .navbarDiv1{
+    margin: auto 15px auto 40px;
+    text-align: center;
+    
+  }
+
+  .navbarDiv1 a{
+    float: left;
+  }
+  .navbarDiv1 h1{
+    color:white;
+  }
+  
+  /* Navigation links */
+  .navbar1 a {
+    /* float: left; */
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* The subnavigation menu */
+  .subnav1 {
+    float: left;
+    overflow: hidden;
+  }
+  
+  /* Subnav button */
+  .subnav1 .subnavbtn1{
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  /* Add a red background color to navigation links on hover */
+  .navbar1 a:hover, .subnav1:hover .subnavbtn1 {
+    
+    text-decoration: underline;
+  }
+  
+  /* Style the subnav content - positioned absolute */
+  .subnav-content1 {
+    display: none;
+    position: absolute;
+    left: 0;
+    margin-left: 0;
+    background-color: inherit;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  /* Style the subnav links */
+  .subnav-content1 a {
+    float: right;
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* Add a grey background color on hover */
+  .subnav-content1 a:hover {
+    text-decoration: underline;
+    font-weight:600 ;
+  }
+  
+  /* When you move the mouse over the subnav container, open the subnav content */
+  .subnav1:hover .subnav-content1 {
+    display: block;
+  }
+
+  
+
+  .overlay1 {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+    height: 100%;
+    width: 0;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    right: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.7); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.3s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  }
+  
+  /* Position the content inside the overlay */
+  .overlay-content1 {
+    position: relative;
+    top: 20%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+     /* 30px top margin to avoid conflict with the close button on smaller screens */
+  }
+  
+  .overlay-content1 a{
+    display: block;
+  }
+  /* The navigation links inside the overlay */
+  .overlay1 a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: white;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .overlay1 a:hover, .overlay1 a:focus {
+    color: #f1f1f1;
+  }
+  
+  /* Position the close button (top right corner) */
+  .overlay1 .closebtn1 {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+  
+  /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+  @media screen and (max-height: 450px) {
+    .overlay1 a {font-size: 20px}
+    .overlay1 .closebtn1 {
+      font-size: 40px;
+      top: 15px;
+      right: 35px;
+    }
+  }
+
+
+  .openSlide1{
+    display: none;
+  }
+
+  .openSlide1 img{
+    margin-right: 15px;
+    height: 25px;
+    width: 25px;
+  }
+
+  @media screen and (max-width: 700px){
+
+    .slideOption1{
+        display: none;
+    }
+
+    .openSlide1{
+        display: block;
+        margin: auto 20px auto 0px;
+        text-align: center;
+    }
+
+  }
+
+
+
+
+
+
+
+
+
