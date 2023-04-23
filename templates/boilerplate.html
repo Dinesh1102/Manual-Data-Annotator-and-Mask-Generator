@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/styles2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <!-- The navigation menu -->
+    <div class="bg">
+
+        <div class="navbar">
+            <div class="navbarDiv">
+                <h1>DataMarkIt</h1>
+            </div>
+
+            <div class="navbarDiv slideOption">
+                <a href="{{url_for('home')}}">Home</a>
+                <div class="subnav">
+                    <button class="subnavbtn"> Features <i class="fa fa-caret-down"></i></button>
+                    <div class="subnav-content">
+                        <a href="{{url_for('all')}}">All Masks</a>
+                        <a href="{{url_for('crop')}}">Selection Segmentation</a>
+                        <a href="{{url_for('video')}}">Video</a>
+                        <a href="{{url_for('bg_change')}}">Background Change</a>
+                        <a href="{{url_for('bg_remove')}}">Background Remove</a>
+                        <a href="{{url_for('Mmask')}}">Manual Mask</a>
+                        <a href="{{url_for('all_wmask')}}">All White Masks</a>
+
+                    </div>
+                </div>
+                <a href="{{url_for('history')}}">History</a>
+                
+                <a href="{{url_for('logout')}}">Logout</a>
+            </div>
+
+            <!-- The overlay -->
+
+            
+
+                <!-- Overlay content -->
+                <div id="myNav" class="overlay">
+
+                    <!-- Button to close the overlay navigation -->
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+                    <!-- Overlay content -->
+                    <div class="overlay-content">
+                        <a href="{{url_for('home')}}">Home</a>
+                        
+                        <a href="{{url_for('all')}}">All Masks</a>
+                        <a href="{{url_for('crop')}}">Selection Segmentation</a>
+                        <a href="{{url_for('video')}}">Video</a>
+                        <a href="{{url_for('bg_change')}}">Background Change</a>
+                        <a href="{{url_for('bg_remove')}}">Background Remove</a>
+                        <a href="{{url_for('Mmask')}}">Manual Masks</a>
+                        <a href="{{url_for('all_wmask')}}">All White Masks</a>
+                        <a href="{{url_for('history')}}">History</a>
+                        <a href="{{url_for('logout')}}">Logout</a>
+                    </div>
+
+                </div>
+
+                <!-- Use any element to open/show the overlay navigation menu -->
+                <div onclick="openNav()" class="openSlide">
+                    <img src="/static/images/menuIcon.png" alt="">
+                </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="{{ category }}" id="flash-message">
+            <div>
+                {{ message }}
+            </div>
+            <div>
+                <img src="/static/images/close.svg" alt="" id="close-btn">
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+
+    <script>
+        const closeBtn = document.getElementById('close-btn');
+        const flashMessage = document.getElementById('flash-message');
+
+        closeBtn.addEventListener('click', function () {
+            flashMessage.remove();
+        });
+
+        function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+        }
+
+        /* Close when someone clicks on the "x" symbol inside the overlay */
+        function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+        }
+
+        function dropdownOpen() {
+
+            dropdown = document.getElementById("dropdown-container");
+            if (dropdown.style.display == 'block')
+                dropdown.style.display = 'none';
+            else
+                dropdown.style.display = 'block';
+        }
+
+    </script>
+
+</body>
+
+</html>

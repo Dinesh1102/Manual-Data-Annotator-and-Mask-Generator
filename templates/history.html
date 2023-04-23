@@ -1,0 +1,119 @@
+{% extends 'boilerplate.html' %}
+
+{% block title %}User History{% endblock %}
+
+{% block content %}
+
+    <div id="image-container" >
+      <div class="historyWrapper">
+        
+        
+          {%if flag==0 %}
+
+            <div style="height: 100px;" >
+              <h1>You havent uploaded any images !! , Go try some of our features !!</h1>
+            </div> 
+
+          {% else %}
+          
+          {% for image in i%}
+          <div class="image-container othersHistory">
+                  <h1>{{image.type}}</h1>
+                  <img src="data:image/jpeg;base64,{{ image.input|b64encode }}" alt="image" srcset="">
+                  <img src="data:image/jpeg;base64,{{ image.output|b64encode }}" alt="image" srcset="">
+          </div>
+        {%endfor%}
+          
+
+
+        {% for image in j%}
+          
+          <div class="image-container bg-change">
+            <h1>{{image.type}}</h1>
+              <img src="data:image/jpeg;base64,{{ image.input1|b64encode }}" alt="image" srcset="">
+              <img src="data:image/jpeg;base64,{{ image.input2|b64encode }}" alt="image" srcset="">
+              <img src="data:image/jpeg;base64,{{ image.output|b64encode }}" alt="image" srcset="">
+          </div>
+          
+          {%endfor%}
+          {%endif%}
+          
+
+                
+          </div> 
+
+          
+    </div>
+
+    <div id="pagination">
+      <button id="prev-btn" class="historyButton">Previous</button>
+      <button id="next-btn" class="historyButton">Next</button>
+    </div>
+    
+      
+      
+      <script>
+   
+
+
+        var itemsPerPage = 3;
+        var currentPage = 1;
+        var items = document.querySelectorAll('.image-container');
+        var numPages = Math.ceil(items.length / itemsPerPage);
+        var prevBtn = document.getElementById('prev-btn');
+        var nextBtn = document.getElementById('next-btn');
+      
+        function showPage(page) {
+          currentPage = page;
+          var startIndex = (page - 1) * itemsPerPage;
+          var endIndex = startIndex + itemsPerPage;
+      
+          for (var i = 0; i < items.length; i++) {
+            if (i >= startIndex && i < endIndex) {
+              items[i].style.display = 'block';
+            } else {
+              items[i].style.display = 'none';
+            }
+          }
+          updatePagination();
+        }
+      
+        function createPaginationLinks() {
+          var pagination = document.getElementById('pagination');
+          for (var i = 1; i <= numPages; i++) {
+            var link = document.createElement('a');
+            link.innerHTML = i;
+            link.href = '#';
+            link.onclick = function(event) {
+              event.preventDefault();
+              showPage(parseInt(event.target.innerHTML));
+            }
+            pagination.insertBefore(link, nextBtn);
+          }
+        }
+      
+        function updatePagination() {
+  
+          prevBtn.disabled = (currentPage === 1);
+          nextBtn.disabled = (currentPage === numPages);
+        }
+      
+        prevBtn.onclick = function() {
+          showPage(currentPage - 1);
+        }
+      
+        nextBtn.onclick = function() {
+          showPage(currentPage + 1);
+        }
+      
+        showPage(currentPage);
+
+
+        
+
+
+
+        
+      </script>
+
+{% endblock %}

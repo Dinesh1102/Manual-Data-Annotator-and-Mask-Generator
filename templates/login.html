@@ -1,0 +1,49 @@
+{% extends 'navbarLogin.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="{{ category }}" id="flash-message">
+    <div>
+        {{ message }}
+    </div>
+    <div>
+        <img src="/static/images/close.svg" alt="" id="close-btn">
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="loginPage">
+
+  <div class="loginPageDiv">
+    <div class="loginImage">
+      <img src="/static/images/loginpage.png" alt="">
+    </div>
+
+    <div class="loginForm">
+
+      <form method=POST action="{{url_for('login')}}">
+        <h1>LOGIN</h1>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter your username" aria-autocomplete="none"
+          Required>
+
+        <label for="pass">Password</label>
+        <input type="password" name="pass" id="pass" placeholder="Enter your password" Required>
+
+        <button type="submit">Login</button>
+        <p>Don't have an account? <a href="{{url_for("register")}}">Register here.</a></p>
+      </form>
+
+    </div> 
+
+  </div>    
+
+</div>
+{% endblock %}

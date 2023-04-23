@@ -1,0 +1,77 @@
+{% extends 'boilerplate.html' %}
+
+{% block title %}Background Remove{% endblock %}
+
+{% block content %}
+
+
+{%if filename %}
+<div class="mainDivOutput">
+  <div class="wrapperOutput">
+    <h1>Background Remove</h1>
+    <h1>Output</h1>
+    <div>
+      <img src="{{url_for('display_bg_remove',filename=filename)}}" alt="">
+    </div>
+    
+  </div>
+</div>
+
+ 
+{%else%}
+  <div class="mainDiv">
+    <div class="wrapperDiv">
+      <div class="heading">
+        <h1>Background Remove</h1>
+      </div>
+
+      <div class="heading">
+        <h1>Upload a file</h1>
+      </div>
+
+      <div class="chooseFile">
+
+
+        <form class="form-horizontal" action="/submit_bg_remove" method="post" enctype="multipart/form-data"> 
+
+          <label for="fileInput" id="label">
+            <h2>Drag files here or click to choose files.</h2>
+          </label>   
+
+          <input type="file" class="form-control" name="my_image" id="fileInput">
+          <canvas id="canvas"></canvas>
+          <button type="submit" class="cropButton" id="cropButton" >Submit</button>
+        </form>
+
+
+      </div>
+
+    </div>
+
+  </div>
+  {% endif %}
+  
+<script>
+  const canvas = document.getElementById("canvas");
+  let image = new Image();
+  const ctx = canvas.getContext("2d");
+  document.getElementById("fileInput").addEventListener("change", (e) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      image.src = event.target.result;
+      image.onload = () => {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.style.display = "block";
+        canvas.style.width = "90%";
+        canvas.style.height = "90%";
+        document.getElementById("cropButton").style.display = "block";
+        document.getElementById("label").style.display = "none";
+        ctx.drawImage(image, 0, 0);
+      };
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
+</script>
+
+{% endblock %}

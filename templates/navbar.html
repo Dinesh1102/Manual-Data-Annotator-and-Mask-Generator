@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}"> 
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body class="loginBody">
+
+
+    <div class="navLogin">
+        <div>
+            <h1>AnnoTator</h1>
+        </div>
+        <div>
+            <a  href="{{url_for("main")}}"><button>Home</button></a></button>
+            <a  href="{{url_for("register")}}"><button>Register</button></a>
+        </div>
+    </div> 
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

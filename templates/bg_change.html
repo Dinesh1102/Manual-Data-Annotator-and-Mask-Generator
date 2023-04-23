@@ -1,0 +1,107 @@
+{% extends 'boilerplate.html' %}
+
+{% block title %}Background Change{% endblock %}
+
+{% block content %}
+
+
+{%if filename %}
+
+<div class="mainDivOutput">
+  <div class="wrapperOutput">
+    <h1>Background Change</h1>
+    <h1>Output</h1>
+    <div>
+      <img src="{{url_for('display_bg_change',filename=filename)}}" alt="">
+
+    </div>
+    
+  </div>
+</div>
+{%else%}
+<div class="mainDivChange">
+  <div class="wrapperDivChange">
+    <div class="heading">
+      <h1>Background Change</h1>
+    </div>
+    <div class="heading">
+      <h1>Upload a file</h1>
+    </div>
+
+    <div class="chooseFileChange">
+
+      <form class="form-horizontal" action="/submit_bg_change" method="post" enctype="multipart/form-data"> 
+        <div class="image">
+         
+          <label for="fileInput" id="label1">
+            <h2>Drag your <em>image file</em> here or click to choose file.</h2>
+          </label> 
+          <input type="file" class="form-control" name="my_image" id="fileInput">
+          <canvas id="canvas" ></canvas>
+        </div> 
+        <div class="bg_image">
+      
+          <label for="fileInput" id="label2">
+            <h2>Drag your <em>Background image file</em> here or click to choose file.</h2>
+          </label>
+          <input type="file" class="form-control" name="bg" id="bgInput">
+          <canvas id="canvas_bg"></canvas>
+        </div>
+        
+        <button type="submit" class="cropButton" id="cropButton" >Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+{%endif%}
+
+<script>
+  const canvas = document.getElementById("canvas");
+  let image = new Image();
+  const ctx = canvas.getContext("2d");
+  document.getElementById("fileInput").addEventListener("change", (e) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      image.src = event.target.result;
+      image.onload = () => {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.style.display = "block";
+        canvas.style.width = "90%";
+        canvas.style.height = "90%";
+        document.getElementById("fileInput").style.display ="none";
+        document.getElementById("label1").style.display = "none";
+        ctx.drawImage(image, 0, 0);
+      };
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
+  const canvas_bg = document.getElementById("canvas_bg");
+  let bg = new Image();
+  const cty = canvas_bg.getContext("2d");
+  document.getElementById("bgInput").addEventListener("change", (e) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      bg.src = event.target.result;
+      bg.onload = () => {
+        canvas_bg.width = bg.width;
+        canvas_bg.height = bg.height;
+        canvas_bg.style.display = "block";
+        canvas_bg.style.width = "90%";
+        canvas_bg.style.height = "90%";
+        document.getElementById("bgInput").style.display = "none";
+        document.getElementById("label2").style.display = "none";
+        cty.drawImage(bg, 0, 0);
+      };
+    };
+    document.getElementById("cropButton").style.display = "block";
+    reader.readAsDataURL(e.target.files[0]);
+  });
+</script>
+
+{% endblock %}
+
+

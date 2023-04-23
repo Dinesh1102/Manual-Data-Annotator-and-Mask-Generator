@@ -1,0 +1,87 @@
+{% extends 'boilerplate.html' %}
+
+{% block title %}DataMarkIt{% endblock %}
+
+{% block content %}
+
+
+
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <img src="/static/images/manual_home.jpeg" alt="">
+            <div>
+                End user drags the mouse pointer around the desired object or can use polylines to form a loop so that a white mask is generated around it.
+            </div>
+            <a href="{{url_for('Mmask')}}"><button>Manual Mask Generator</button></a>
+           
+
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <img src="/static/images//all_white_home.jpeg" alt="">
+            <div>
+                A white mask is generated around all the objects detected by the model.
+            </div>
+            <a href="{{url_for('all_wmask')}}"><button>All White Masks</button></a>
+           
+
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="/static/images/all_home.jpg" alt="">
+            <div>
+                Model generates a mask along with label and accuracy score for all the detected objects in the image.
+            </div>
+            <a href="{{url_for('all')}}"><button>All Masks</button></a>
+
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="/static/images/croped_home.png" alt="">
+            <div>
+                End user draws a bounding box and all the objects inside the box are segmented and labelled.
+            </div>
+            <a href="{{url_for('crop')}}"><button>Selection</button></a>
+
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            
+            <img src="/static/images/video_home.jpeg" alt="">
+            <div>
+                Instance segmentation is done for all the objects in the video dynamically
+            </div>
+            <a href="{{url_for('video')}}"><button>Video</button></a>
+
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="/static/images/bg_change_home.jpeg" alt="">
+            <div>
+                Background is changed for all the objects whose accuracy score is >90%
+            </div>
+            <a href="{{url_for('bg_change')}}"><button>Background Change</button></a>
+
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="/static/images/bg_remove_home.jpeg" alt="">
+            <div>
+                Background is removed for all the objects whose accuracy score is > 90%
+            </div>
+            <a href="{{url_for('bg_remove')}}"><button>Background Remove</button></a>
+
+        </div>
+    </div>
+    
+</div> 
+
+{% endblock %}

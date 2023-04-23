@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='output.css') }}"> -->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <title>DataMarkIt</title>
+</head>
+
+<body>
+    <div class="mainDiv">
+        <div class="mainPage">
+            <div class="login">
+                <div>
+                    <h1>DataMarkIt</h1>
+                </div>
+                <div>
+                    <a href="{{url_for("login")}}"><button>Login</button></a></button>
+                    <a href="{{url_for("register")}}"><button>Register</button></a>
+                </div>
+            </div>
+
+            <div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="{{ category }}" id="flash-message">
+                    <div>
+                        {{ message }}
+                    </div>
+                    <div>
+                        <img src="/static/images/close.svg" alt="" id="close-btn">
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+
+            <div class="centeredText">
+
+                <h1>Manual Data Annotator and Mask Generator</h1>
+                <p>An application that will generate a segmentation mask for a given image. The end user drags the mouse pointer and forms a closed loop on the given image. All the pixels in the given loop will act as the mask for the given image.</p>
+
+            </div>
+
+        </div>    
+    </div>
+
+    <script>
+        const closeBtn = document.getElementById('close-btn');
+        const flashMessage = document.getElementById('flash-message');
+
+        closeBtn.addEventListener('click', function () {
+            flashMessage.remove();
+        });
+
+    </script>
+
+</body>
+
+</html>

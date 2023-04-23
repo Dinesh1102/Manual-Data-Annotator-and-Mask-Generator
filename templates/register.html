@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="loginBody">
+
+
+  <div class="navLogin">
+    <div>
+      <h1>AnnoTator</h1>
+    </div>
+    <div>
+      <a href="{{url_for('main')}}"><button>Home</button></a></button>
+      <a href="{{url_for('login')}}"><button>Login</button></a>
+    </div>
+  </div>
+
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="{{ category }}" id="flash-message">
+    <div>
+      {{ message }}
+    </div>
+    <div>
+      <img src="/static/images/close.svg" alt="" id="close-btn">
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <div class="registerCenter">
+
+    <div class="RegisterPage">
+
+      <div class="RegisterForm">
+        <h1>Register</h1>
+        <form method=POST action="{{url_for('register')}}">
+
+
+          <div class="register">
+
+            <div class="registerFormDiv">
+
+              <div>
+
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Enter your username"
+                  aria-autocomplete="none" Required>
+
+                <label for="fname">First Name</label>
+                <input type="text" name="fname" id="fname" placeholder="Enter your First Name" Required
+                  aria-autocomplete="none">
+
+                <label for="lname">Last Name</label>
+                <input type="text" name="lname" id="lname" placeholder="Enter your Last Name" Required
+                  aria-autocomplete="none">
+
+              </div>
+
+              <div>
+
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" placeholder="Enter your email" Required
+                  aria-autocomplete="none">
+
+                <label for="pass">Password</label>
+                <input type="password" name="pass" id="pass" placeholder="Enter your password" Required
+                  aria-autocomplete="none">
+
+                <label for="cpass">Confirm Password</label>
+                <input type="password" name="cpass" id="cpass" placeholder="Confirm your password" Required
+                  aria-autocomplete="none">
+
+              </div>
+            </div>
+            <div>
+              <button type="submit">Register</button>
+              <p>Already have an account? <a href="{{url_for('login')}}">Login here.</a></p>
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const closeBtn = document.getElementById('close-btn');
+    const flashMessage = document.getElementById('flash-message');
+
+    closeBtn.addEventListener('click', function () {
+      flashMessage.remove();
+    });
+
+  </script>
+</body>
+
+</html>
