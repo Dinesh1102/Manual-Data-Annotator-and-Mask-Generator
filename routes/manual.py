@@ -1,13 +1,33 @@
-from flask import render_template,request,json,flash
+from flask import Flask,render_template,request,json,flash,session
 import os,cv2,shutil
 import numpy as np
+from flask_pymongo import PyMongo
+import json
+from bson.binary import Binary
+import base64
+
+app = Flask(__name__)
+app.config["MONGO_DBNAME"] = 'maskgenerator'
+app.config['MONGO_URI'] = "mongodb://localhost:27017/maskgenerator"
+
+
+mongo_uri = "mongodb://localhost:27017/maskgenerator"
+mongo = PyMongo(app, uri=mongo_uri)
+
+
+def b64encode(value):
+    return base64.b64encode(value).decode('utf-8')
+
+# Add the b64encode filter to the Jinja2 environment
+app.jinja_env.filters['b64encode'] = b64encode
+
 # generate masks for objects inside the loops 
 def manual():
     if request.method=="POST":
         im=request.files['imageLoader']
-        if not os.path.exists('images'):
-            os.makedirs('images')
-        im_path='images/'+im.filename
+        if (not os.path.exists('static/manual_before')):
+            os.makedirs('static/manual_before')
+        im_path='static/manual_before/'+im.filename
         im.save(im_path)
         img = cv2.imread(im_path)
         #coordinates of loops from html stored in data
@@ -57,6 +77,30 @@ def manual():
             cv2.imwrite("static/manual/res/"+im.filename,resu)
             if os.path.exists('static/results'):
                 shutil.rmtree('static/results')
+            
+            username=session['username']
+            images= mongo.db.images
+            existing_user=images.find_one({'user':username})
+            # file=cv2.imread("static/crop_before/"+img)
+            with open("images/"+ im.filename,"rb") as file:
+                encoded_image = base64.b64encode(file.read())
+            with open("static/manual/"+im.filename,"rb") as file2:
+                encoded_image2 = base64.b64encode(file2.read())
+            with open("static/manual/res/"+im.filename,"rb") as op:
+                encoded_op = base64.b64encode(op.read())
+            # op=cv2.imread("static/cr/"+img)
+            # encoded_op = base64.b64encode(op)
+
+            if existing_user is None:
+                images.insert_one({
+                    'user':username,
+                    'files':[{ 'input1': Binary(encoded_image), 'input2' : Binary(encoded_image2) ,'output':Binary(encoded_op) , 'type':"Manual Mask Generator" }],
+                    
+                    })
+            else:
+                images.update_one( {'user':username}, {"$push": {'files':{'input1': Binary(encoded_image), 'input2' : Binary(encoded_image2) ,'output':Binary(encoded_op)  , 'type':"Manual Mask Generator"} } } )
+            
+
             return render_template('Mmask.html',filename=im.filename,flag=1)
         #if data is empty return to the page as loop is not closed
         else:
