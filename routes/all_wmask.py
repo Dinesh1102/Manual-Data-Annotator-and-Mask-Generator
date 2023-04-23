@@ -2,7 +2,6 @@ from flask import Flask, request, render_template,redirect,url_for,session,flash
 import base64,os,cv2
 import numpy as np
 from flask_pymongo import PyMongo
-from werkzeug.utils import secure_filename
 from bson.binary import Binary
 import base64
 
@@ -24,10 +23,10 @@ app.jinja_env.filters['b64encode'] = b64encode
 #generate masks for all the objects
 def all_wop():
     if request.method=='POST':
-        if (not os.path.exists('images')):
-            os.mkdir('images')
+        if (not os.path.exists('static/all_wmask_before')):
+            os.makedirs('static/all_wmask_before')
         im = request.files['mask_ip']
-        img_path = "images/" + im.filename	
+        img_path = "static/all_wmask_before/" + im.filename	
         im.save(img_path)
         img = cv2.imread(img_path)
         hh, ww = img.shape[:2]
@@ -35,7 +34,7 @@ def all_wop():
         # threshold on white
         # Define lower and uppper limits
         lower = np.array([10, 10, 10])
-        upper = np.array([255, 255, 255])
+        upper = np.array([250, 250, 250])
 
         # Create mask to only select black
         thresh = cv2.inRange(img, lower, upper)
