@@ -62,7 +62,7 @@ def all_wop():
         images= mongo.db.images
         existing_user=images.find_one({'user':username})
        
-        with open("images/"+ im.filename,"rb") as file:
+        with open("static/all_wmask_before/"+ im.filename,"rb") as file:
             encoded_image = base64.b64encode(file.read())
         with open("static/all_wmask/"+im.filename,"rb") as file2:
             encoded_image2 = base64.b64encode(file2.read())
