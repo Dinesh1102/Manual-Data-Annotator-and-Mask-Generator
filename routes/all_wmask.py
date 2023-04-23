@@ -34,7 +34,7 @@ def all_wop():
 
         # threshold on white
         # Define lower and uppper limits
-        lower = np.array([200, 200, 200])
+        lower = np.array([10, 10, 10])
         upper = np.array([255, 255, 255])
 
         # Create mask to only select black
@@ -45,7 +45,7 @@ def all_wop():
         morph = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
 
         # invert morp image
-        mask = 255 - morph
+        mask = morph
         if not os.path.exists('static/all_wmask'):
             os.makedirs('static/all_wmask')
         # save results
