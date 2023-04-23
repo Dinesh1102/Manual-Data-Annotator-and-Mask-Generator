@@ -58,7 +58,7 @@ Clone the repository:
 
 Change the current working directory:
 
-```cd Manual-Data-Annotator-and-Mask-Generator-main```
+```cd Manual-Data-Annotator-and-Mask-Generator```
 
 Install the requirements:
 
@@ -68,5 +68,9 @@ Run the server:
 
 ```python index.py```
 
+Install <a href="https://www.mongodb.com/try/download/compass">MongoDB Compass</a>
+
+Connect to MongoDB server on MongoDB Compass
+
 App starts running on:
-<a href="http://127.0.0.1:5000"> local host</a>
+<a href="http://127.0.0.1:5000">Local Host</a>
