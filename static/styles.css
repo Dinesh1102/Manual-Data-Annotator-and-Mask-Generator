@@ -1,0 +1,537 @@
+/* message */
+
+.success{
+    font-weight: 600;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(158, 194, 158);
+    margin:25px auto; 
+    text-align: center;
+    width:30%;
+    max-width: 50%;
+    height: 50px;
+    border-radius: 10px ;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+    transition: 0.5s ease-in-out;
+}
+
+.message img,
+.danger img,
+.success img{
+    width: 15px;
+    height: 15px;
+}
+
+
+.message div,
+.danger div,
+.success div{
+    
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    height: 100%;
+}
+
+.danger{
+    font-weight: 600;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(219, 127, 127);
+    margin: 25px auto; 
+    text-align: center;
+    width:30%;
+    height: 50px;
+    border-radius: 10px ;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.message{
+    font-weight: 600;
+    display: flex;
+    justify-content: space-around;
+    background-color: #c187bf;
+    margin: 25px auto; 
+    text-align: center;
+    width:30%;
+    height: 50px;
+    border-radius: 10px ;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 880px )   {
+
+    .message,
+    .danger,
+    .success{
+        width: 50%;
+    }   
+}
+
+body{
+    margin:0;
+}
+
+/* mainpage */
+
+.mainDiv{
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.centeredText{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    
+}
+
+/* .mainPage{
+    background-image: url('/static/images/projectbg.png');
+    background-size:cover;
+    width: 100vw;
+    height: 100vh;
+} */
+
+.mainPage{    
+    position: relative;
+    background: url('/static/images/mainpagebg1.png') no-repeat fixed ;  
+    /* filter: brightness(60%);    */
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+}
+
+
+
+.login{
+    justify-content:space-between;
+    display: flex;
+    text-align: right;
+    padding:10px 35px 0px 0px ;
+}
+
+.login a button {
+    border-color: white;
+    color: white;
+    background-color: transparent;
+    border-radius: 4px;
+    border-width: 2px;
+    padding: 8px 10px 8px 10px;
+    margin: 15px 10px 0px 20px ;
+    width: 100px;
+    font-weight: 600;
+}
+
+.login a button:hover,
+.login a button:focus{
+    background-color: white;
+    border-color: transparent;
+    color: #17143F;
+}
+.login h1{
+    text-align: left;
+    margin: 15px 0px 0px 40px;
+    color: white;
+}
+.login a{
+    text-decoration: none;
+}
+
+
+
+
+
+/* loginpage */
+
+.loginBody{
+    z-index: -1;
+    /* background: linear-gradient(to bottom, #17143F 0%, #5d3475 30% , #9b4b99 90%) no-repeat; */
+    
+}
+
+/* .loginBody::after {
+    height: 100%;
+    background:  linear-gradient(to bottom, #17143F 0%, #5d3475 30% , #9b4b99 90%) no-repeat; 
+} */
+
+.loginBody::before {
+    content: "";
+    display: block;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background:  linear-gradient(to bottom, #17143F 0%, #5d3475 30% , #9b4b99 90%) no-repeat; 
+    z-index: -1;
+  }
+
+
+/* .loginBody::after {
+  
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    
+    left: 0;
+    background-color: green; 
+    z-index: -1; 
+  } */
+.loginPage{
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    margin:50px 30px 20px 30px;
+    padding-top:40px;
+    padding-bottom: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content:center;
+    z-index: 1;
+    background-color: #EEEEEE;
+}
+
+.loginPageDiv{
+    width: 100%;
+    margin: auto auto;
+    justify-content: center;
+    display: flex;
+}
+
+.loginImage{
+    width: 60%;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    
+}
+.loginImage img{
+    margin :0 auto 5px auto;
+    width: 75%;
+    height: 100%;
+}
+
+.loginForm{
+    width: 40%;
+    margin: auto auto;
+    justify-content: center;
+    display: flex;
+    
+}
+
+
+.loginForm form{
+    background: linear-gradient(to bottom, #17143F 0%, #5d3475 30% , #9b4b99 90%);
+    padding: 20px 70px 45px 70px;
+    border-color: black;
+    border-radius: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    border-width: 2px;
+    height:fit-content;
+    width:fit-content;
+   
+
+}
+
+.loginForm form h1{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+.loginForm form label{
+    font-weight: 540;
+    padding-left: 5px;
+    margin:10px auto;
+    color: white;
+    display: block;
+
+}
+
+.loginForm form input{
+    display: block;
+    width: 90%;
+    color: white;
+    background-color: transparent;
+    border-color: white;
+    border-radius: 7px;
+    border-width: 2px;
+    padding: 8px 10px 8px 10px;
+    margin: 0px 0px 25px 0px ;
+}
+.loginForm form input:focus{
+    outline:none;
+}
+.loginForm form input::placeholder{
+    color: rgb(195, 181, 181);
+}
+
+.loginForm form button{
+    display: block;
+    font-size: 15px;
+    border-radius: 8px;
+    border-width: 2px;
+    padding: 8px 10px 8px 10px;
+    margin: 25px 0px 0px 0px;
+   background-color: white;
+   border-color: transparent;
+   color: #17143F;
+    width: 100px;
+    font-weight: 600;
+}
+
+.loginForm form button:hover,
+.loginForm form button:focus{
+    background-color: transparent;
+    border-color: white;
+    color: white;
+}
+
+.loginForm form p{
+    margin-top:25px;
+    color: rgb(226, 222, 222);
+}
+.loginForm form a{
+    color:  rgb(226, 222, 222);
+    /* text-decoration: none; */
+}
+
+.loginForm form a:hover{
+    color:white;
+    text-decoration: none;
+
+}
+
+@media screen  and (max-width: 1030px) and (min-width: 800px){
+
+    .loginImage{
+        width: 45%;
+    }
+
+    .loginForm{
+        width: 50%;
+    }
+    
+}
+ 
+@media screen and (max-width: 800px){
+
+    .loginImage{
+        width: 0;
+        height: 0;
+
+    }
+
+    .loginForm{
+        width: 90%;
+    }
+    
+} 
+
+/* registerPage */
+
+.registerCenter{
+    margin: auto auto;
+    display: flex;
+    justify-content: center;
+}
+
+.RegisterPage{
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    margin:40px 30px 20px 30px;
+    padding-top:30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content:center;
+    z-index: 1;
+    background-color: #EEEEEE;
+    width: 70%;
+}
+
+.RegisterForm{
+    width: 80%;
+    display:block ;
+    justify-content: center;
+    background: linear-gradient(to bottom, #17143F 0%, #5d3475 30% , #9b4b99 90%);
+    border-color: black;
+    border-radius: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    border-width: 2px;
+    height:fit-content;
+  
+}
+
+.register{
+    padding:auto auto;
+    
+}
+
+.RegisterForm form{
+    display: flex;
+    justify-content: center;
+    border-color: black;
+    border-radius: 4px;
+    border-width: 2px;
+    padding: 8px auto 8px auto;
+    margin: 20px 60px 45px 60px ;
+   
+}
+
+.RegisterForm h1{
+    font-size:2.7rem;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: white;
+    font-weight: bold;
+
+}
+
+.RegisterForm form label{
+    font-weight: 540;
+    /* padding-left: 5px; */
+    margin:10px auto;
+    color: white;
+    display: block;
+
+}
+
+.RegisterForm form input{
+    display: block;
+    width: 100%;
+    color: white;
+    background-color: transparent;
+    border-color: white;
+    border-radius: 7px;
+    border-width: 2px;
+    padding: 8px 10px 8px 10px;
+    margin: 0px 0px 25px 0px ;
+}
+.RegisterForm form input:focus{
+    outline:none;
+}
+.RegisterForm form input::placeholder{
+    color: rgb(195, 181, 181);
+}
+
+.RegisterForm form button{
+    align-self: center;
+    display: block;
+    font-size: 15px;
+    border-radius: 8px;
+    border-width: 2px;
+    padding: 8px 30px 8px 30px;
+    
+    background-color: white;
+    border-color: transparent;
+    color: #17143F;
+    /* width:   100%; */
+    font-weight: 600;
+    display: block;
+    margin-top: 25px;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: calc(100% - 83px);
+    
+}
+
+.RegisterForm form button:hover,
+.RegisterForm form button:focus{
+    background-color: transparent;
+    border-color: white;
+    color: white;
+}
+
+.RegisterForm form p{
+    margin-top:25px;
+    display: block;
+    text-align: center;
+    color: rgb(226, 222, 222);
+}
+.RegisterForm form a{
+    color:  rgb(226, 222, 222);
+    /* text-decoration: none; */
+}
+
+.RegisterForm form a:hover{
+    color:white;
+    text-decoration: none;
+
+}
+
+
+
+
+.registerFormDiv{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+@media screen and (max-width: 850px){
+    .registerFormDiv{
+        display: block;
+
+    }
+    
+}
+
+.registerFormDiv div{
+    width: 60%;
+    margin: 5px 50px;
+}
+
+
+/* navbar */
+
+.navLogin{
+    justify-content:space-between;
+    display: flex;
+    text-align: right;
+    padding:10px 35px 0px 0px ;
+}
+
+.navLogin a button {
+    color: #17143F;
+    background-color: #EEEEEE;
+    border-radius: 4px;
+    padding: 8px 10px 8px 10px;
+    margin: 15px 10px 0px 20px ;
+    width: 100px;
+    font-weight: 600;
+}
+
+.navLogin a button:hover,
+.navLogin a button:focus{
+    /* background-color: #c9c9c9; */
+    background:#d3d2d2;
+    outline: none;
+    /* border-width: 3px; */
+    /* border-color: none; */
+    color: #17143F;
+}
+.navLogin h1{
+    text-align: left;
+    margin: 15px 0px 0px 40px;
+    /* background-image: linear-gradient(to right, #e66465, #9198e5); */
+    /* color: linear-gradient(to right , #17143F 0% , #5d3475 40% , #9b4b99 75%); */
+    background-image: linear-gradient(to right , #b7b6b6 0% , #d4d1d1 40% , #EEEEEE 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+}
+.navLogin a{
+    text-decoration: none;
+}
+
