@@ -95,13 +95,13 @@ def history():
 
             
     else:
-        flash(" You havent upladed any images!!" , "message")
-        return render_template('history.html')
+        
+        return render_template('history.html' , i = decoded_images , j=decoded_images_bg_change , flag =0)
     
 
 
 
-    return render_template('history.html' , i = decoded_images , j=decoded_images_bg_change)
+    return render_template('history.html' , i = decoded_images , j=decoded_images_bg_change , flag=1)
 
 
     
@@ -264,6 +264,8 @@ def bg_change():
 def submit_all():
 
     UPLOAD_FOLDER="static/all_before"
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
     app.config["UPLOAD_FOLDER"]=UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH']=16*1024*1024
     file=request.files['my_image']
@@ -291,6 +293,8 @@ def cropimage():
     
 
     UPLOAD_FOLDER="static/crop_before"
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
     app.config["UPLOAD_FOLDER"]=UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH']=16*1024*1024
     file=request.files['image']
@@ -331,6 +335,8 @@ def display_video(filename):
 def submit_bg_remove():
 
     UPLOAD_FOLDER="static/bg_remove_before"
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
     app.config["UPLOAD_FOLDER"]=UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH']=16*1024*1024
     file=request.files['my_image']
@@ -355,6 +361,8 @@ def display_bg_remove(filename):
 def submit_bg_change():
 
     UPLOAD_FOLDER="static/bg_change_before"
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
     app.config["UPLOAD_FOLDER"]=UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH']=16*1024*1024
     file=request.files['my_image']
@@ -378,12 +386,20 @@ def display_bg_change(filename):
 # new
 @app.route('/all_wmask' )
 def all_wmask():
-    return render_template('all_wmask.html')
+    if 'username' in session :
+        verified = session['verify']
+        if(verified == 'true'):
+            return render_template('all_wmask.html')
+    return render_template('login.html')
 
 
 @app.route('/Mmask')
 def Mmask():
-    return render_template('Mmask.html')
+    if 'username' in session :
+        verified = session['verify']
+        if(verified == 'true'):
+            return render_template('Mmask.html')
+    return render_template('login.html')
 
 @app.route('/mask_upload',methods=['POST'])
 def mask_upload():
@@ -392,6 +408,7 @@ def mask_upload():
 @app.route('/display_manual/<filename>')
 def display_manual(filename):
     return redirect(url_for('static',filename='manual/'+filename),code=301)
+
 @app.route('/display_manual_res/<filename>')
 def display_manual_res(filename):
     return redirect(url_for('static',filename='manual/res/'+filename),code=301)
@@ -405,6 +422,7 @@ def submit_all_wmask():
 @app.route('/display_image_all_wmask/<filename>')
 def display_image_all_wmask(filename):
     return redirect(url_for('static',filename='all_wmask/'+filename),code=301)
+
 @app.route('/display_image_all_wmask_res/<filename>')
 def display_image_all_wmask_res(filename):
     return redirect(url_for('static',filename='all_wmask/res/'+filename),code=301)
@@ -412,5 +430,3 @@ def display_image_all_wmask_res(filename):
 if __name__=='__main__':
     app.config['SECRET_KEY'] = 'mysecretkey'
     app.run(debug = True)
-
-
